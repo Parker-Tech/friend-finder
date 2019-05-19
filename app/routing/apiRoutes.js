@@ -1,14 +1,17 @@
-var express = require('express');
 var friends = require("../data/friends");
-var router = express.Router();
 
-  router.get('/api/friends', function(req, res, next) {
+module.exports = function(app){
+  app.get('/api/friends', function(req, res) {
     res.json(friends);
   });
+  
+  app.post('/api/friends', function(req, res) {
+    const user = req.body;
 
-  router.post('/api/friends', function(req, res, next) {
-    friends.push(req.body);
-    res.json(true);
+    var scoreArr = user.score.map(function(x) { 
+      return parseInt(x, 10); 
+    });
+    
+    console.log(scoreArr);
   });
-
-module.exports = router;
+};

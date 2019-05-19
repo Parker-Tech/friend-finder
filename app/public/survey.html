@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <form>
+        <div class="form-group">
+          <label for="userName">Name</label>
+          <input type="text" class="form-control" id="userName">
+        </div>
+        <div class="form-group">
+          <label for="photoLink">Link to Photo Image</label>
+          <input type="text" class="form-control" id="photoLink">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="question1">How much do you like long walks on the beach?</label>
+          <select class="form-control" id="question1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="question2">Do you like Italian food?</label>
+          <select class="form-control" id="question2">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="question3">Do you like animals?</label>
+          <select class="form-control" id="question3">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="question4">Do you like to party?</label>
+          <select class="form-control" id="question4">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="question5">Do you like the new season of Game of Thrones?(Season 8)</label>
+          <select class="form-control" id="question5">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="question6">Do you like the new season of Game of Thrones?(Season 8)</label>
+          <select class="form-control" id="question6">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary submit">Submit</button>
+      </form>  
+    </div>
+
+    <div id="resModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title"><strong>Best Match</strong></h2>
+        </div>
+        <div class="modal-body">
+          <h2 id="match-name"></h2>
+          <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.js'></script>
+  <script type="text/javascript">
+    $(".submit").on("click", function() {
+      // event.preventDefault();
+
+      var userInfo = {
+        userName: $("#userName").val().trim(),
+        userPhoto: $("#photoLink").val().trim(),
+        scores: [
+          $("#question1").val(),
+          $("#question2").val(),
+          $("#question3").val(),
+          $("#question4").val(),
+          $("#question5").val(),
+          $("#question6").val()
+        ]
+      };
+      console.log(userInfo)
+
+      $.post("api/friends", userInfo, function(data) {
+        //show results after post
+        $("#match-name").text(data.name);
+        $("#match-img").attr("src", data.photo);
+
+          $("#results-modal").modal("toggle");
+      });
+    });
+  </script>
+  </body>
+
+  
+</html>
