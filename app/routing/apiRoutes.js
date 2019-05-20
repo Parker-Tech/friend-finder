@@ -8,6 +8,8 @@ module.exports = function(app){
   app.post('/api/friends', function(req, res) {
     const user = req.body;
 
+    console.log(user);
+
     var scoreArr = user.score.map(function(x) { 
       return parseInt(x, 10); 
     });
