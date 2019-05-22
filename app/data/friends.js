@@ -1,7 +1,7 @@
 var friendArray = [
   {
     "name":"Ahmed",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo":"https://via.placeholder.com/150",
     "scores":[
         5,
         1,
@@ -13,7 +13,7 @@ var friendArray = [
   },
   {
     "name":"Jerry",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo":"https://via.placeholder.com/150",
     "scores":[
         3,
         1,
@@ -25,7 +25,7 @@ var friendArray = [
   },
   {
     "name":"Jose",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo":"https://via.placeholder.com/150",
     "scores":[
         4,
         2,

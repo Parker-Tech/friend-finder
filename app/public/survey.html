@@ -11,7 +11,7 @@
   <body>
     <div class="container">
 
-      <form>
+      <form id="main-form">
         <div class="form-group">
           <label for="userName">Name</label>
           <input type="text" class="form-control" id="userName">
@@ -23,7 +23,7 @@
         <hr>
         <div class="form-group">
           <label for="question1">How much do you like long walks on the beach?</label>
-          <select class="form-control" id="question1">
+          <select class="chosen-select" id="question1">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
           <label for="question2">Do you like Italian food?</label>
-          <select class="form-control" id="question2">
+          <select class="chosen-select" id="question2">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -51,7 +51,7 @@
         </div>
         <div class="form-group">
           <label for="question3">Do you like animals?</label>
-          <select class="form-control" id="question3">
+          <select class="chosen-select" id="question3">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -65,7 +65,7 @@
         </div>
         <div class="form-group">
           <label for="question4">Do you like to party?</label>
-          <select class="form-control" id="question4">
+          <select class="chosen-select" id="question4">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -79,7 +79,7 @@
         </div>
         <div class="form-group">
           <label for="question5">Do you like the new season of Game of Thrones?(Season 8)</label>
-          <select class="form-control" id="question5">
+          <select class="chosen-select" id="question5">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -93,7 +93,7 @@
         </div>
         <div class="form-group">
           <label for="question6">Do you like the new season of Game of Thrones?(Season 8)</label>
-          <select class="form-control" id="question6">
+          <select class="chosen-select" id="question6">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -114,11 +114,12 @@
         <div class="modal-content">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h2 class="modal-title"><strong>Best Match</strong></h2>
+          <div class="modal-body">
+            <h2 id="match-name"></h2>
+            <img id="match-img" src="https://via.placeholder.com/150" alt="">
+          </div>
         </div>
-        <div class="modal-body">
-          <h2 id="match-name"></h2>
-          <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
-        </div>
+        
       </div>
     </div>
     
@@ -126,7 +127,22 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.js'></script>
   <script type="text/javascript">
     $(".submit").on("click", function() {
-      // event.preventDefault();
+      event.preventDefault();
+      // Form validation
+      function validateForm() {
+        var isValid = true;
+        $(".form-control").each(function() {
+          if ($(this).val() === "") {
+            isValid = false;
+          }
+        });
+        $(".chosen-select").each(function() {
+          if ($(this).val() === "") {
+            isValid = false;
+          }
+        });
+        return isValid;
+      }
 
       var userInfo = {
         userName: $("#userName").val().trim(),
@@ -140,14 +156,15 @@
           $("#question6").val()
         ]
       };
+
       console.log(userInfo)
 
-      $.post("api/friends", userInfo, function(data) {
+      $.post("/api/friends", userInfo, function(data) {
         //show results after post
         $("#match-name").text(data.name);
         $("#match-img").attr("src", data.photo);
 
-          $("#results-modal").modal("toggle");
+        $("#resModal").modal("toggle");
       });
     });
   </script>
